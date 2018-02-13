@@ -2,7 +2,7 @@
 <html lang="en-US">
 
 <head>
-  <title>Astro Outlist</title>
+  <title>Astronomy and Astrophysics Outlist</title>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="OoP0puiFUTsizS0hzohiNIHBsR4Z48rJDjhVlTW6lrs" />
@@ -10,7 +10,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-32378628-5"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'UA-32378628-5');
   </script>
@@ -75,8 +75,16 @@
       margin: 0;
     }
 
-    .note{
-      margin: 36px 0;
+    nav{
+      margin-bottom: 24px;
+    }
+
+    .block {
+      margin-bottom: 36px;
+    }
+
+    .block p{
+      margin: 12px 0;
     }
 
     @media (max-width: 760px) {
@@ -104,15 +112,13 @@
       <div style="background-color:#400098;"></div>
       <div style="background-color:#8e008e;"></div>
     </div>
-    <h1>Astro Outlist</h1>
+    <h1>Astronomy and Astrophysics Outlist</h1>
     <nav>
       <a href="#outlist">Outlist</a> |
       <a href="#allylist">Ally List</a> |
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSe2_4LfW4LasdOPiUEzQfRSisN8B2rVQoDJoUt8LznQw-YM0w/viewform">Join/update the list!</a>
     </nav>
-    <div>
-      <p>The Astro Outlist and Ally List were originated by Professor Omer Blaes. They are now moved here for easier maintainance.</p>
-
+    <div class="block">
       <p>As professionals in astronomy, whether we are students, faculty, staff, librarians or are working in other positions,
         we all like to believe that our work environment is determined only by our capabilities as students and researchers,
         and that it is free from personal bias. A productive professional atmosphere depends on open and accepting interactions
@@ -133,20 +139,35 @@
       <p>In the light of the above statements, we, your fellow students, alumni/ae, faculty, coworkers, and friends, sign this
         message.
       </p>
+    </div>
 
-      <p class="note">
+    <div class="block">
+      <p>
         <b>Please
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSe2_4LfW4LasdOPiUEzQfRSisN8B2rVQoDJoUt8LznQw-YM0w/viewform">fill out this form <img src="static/ic_edit.png" /></a>
-          to add yourself to the lists or to update/remove your information.</b><br/>
-          The information you provided will be sent to current maintainers: <a href="https://yymao.github.io/">Yao-Yuan Mao</a> (Pittsburgh) and <a href="http://web.physics.ucsb.edu/~blaes">Omer Blaes</a> (UCSB).
+          to add yourself to the lists or to update/remove your information.</b>
+      </p>
+
+      <p>The information you provided will be sent to current maintainers:
+        <a href="https://yymao.github.io/">Yao-Yuan Mao</a> (Pittsburgh) and
+        <a href="http://web.physics.ucsb.edu/~blaes">Omer Blaes</a> (UCSB).
+      </p>
+
+      <p>Relevent sites:
+        <a href="https://sgma.aas.org/">AAS SGMA</a> |
+        <a href="http://lgbtphysicists.org/">LGBT+Physicists</a>
       </p>
     </div>
 
-    <a name="outlist"><h2>The Outlist</h2></a>
+    <a name="outlist">
+      <h2>The Outlist</h2>
+    </a>
     <div id="wait">Please wait while the list is being generated...</div>
     <div id="outlist"></div>
 
-    <a name="allylist"><h2>The Ally List</h2></a>
+    <a name="allylist">
+      <h2>The Ally List</h2>
+    </a>
     <div id="allylist"></div>
   </div>
 
