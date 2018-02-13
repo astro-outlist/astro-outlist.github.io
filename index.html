@@ -5,28 +5,179 @@
   <title>Astro Outlist</title>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script async defer src="https://spreadsheets.google.com/feeds/list/1r5hsZlu4k-pEcNRFeFZkuHVzq5G0oGbIaPpKoOqDk00/opx6kdi/public/values?alt=json-in-script&callback=populateTable"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" type="text/css">
   <style>
     html {
-      font-family: "Roboto", sans-serif;
-      line-height: 1.2;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     body {
       color: #333;
-      text-align: center;
+    }
+
+    a:link,
+    a:link:hover,
+    a:visited {
+      color: #0CB0FF;
+    }
+
+    .content {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 16px 240px 16px;
+    }
+
+    .row {
+      padding: 8px 6px;
+    }
+
+    .row:nth-child(odd) {
+      background-color: #eee;
+    }
+
+    .row:hover {
+      background-color: #ddd;
+    }
+
+    .name,
+    .position {
+      display: inline-block;
+      vertical-align: top;
+      padding: 0 3px;
+      width: 72%;
+    }
+
+    .name {
+      width: 25%;
+    }
+
+    .rainbow {
+      width: 100%;
+      height: 20px;
+      top: -1px;
+    }
+
+    .rainbow>div {
+      width: 12.5%;
+      height: 100%;
+      float: left;
+      padding: 0px;
+      margin: 0;
+    }
+
+    .note{
+      margin: 36px 0;
+    }
+
+    @media (max-width: 760px) {
+      .name,
+      .position {
+        width: 100%;
+      }
+    }
+
+    img {
+      vertical-align: text-top;
     }
   </style>
 </head>
 
 <body>
-  <h1>Astro Outlist</h1>
-  <h2>A new astro outlist is coming Soon!</h2>
-  <p>
-    <br>➡️
-    <a href="https://web.physics.ucsb.edu/~blaes/lgbtastro/">Visit the current astro outlist here</a>
-  </p>
+  <div class="content">
+    <div class="rainbow">
+      <div style="background-color:#ff69b4;"></div>
+      <div style="background-color:#ff0000;"></div>
+      <div style="background-color:#ff8e00;"></div>
+      <div style="background-color:#ffff00;"></div>
+      <div style="background-color:#008e00;"></div>
+      <div style="background-color:#00c0c0;"></div>
+      <div style="background-color:#400098;"></div>
+      <div style="background-color:#8e008e;"></div>
+    </div>
+    <h1>Astro Outlist</h1>
+    <nav>
+      <a href="#outlist">Outlist</a> |
+      <a href="#allylist">Ally List</a> |
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSe2_4LfW4LasdOPiUEzQfRSisN8B2rVQoDJoUt8LznQw-YM0w/viewform">Join/update the list!</a>
+    </nav>
+    <div>
+      <p>The Astro Outlist and Ally List were originated by Professor Omer Blaes. They are now moved here for easier maintainance.</p>
+
+      <p>As professionals in astronomy, whether we are students, faculty, staff, librarians or are working in other positions,
+        we all like to believe that our work environment is determined only by our capabilities as students and researchers,
+        and that it is free from personal bias. A productive professional atmosphere depends on open and accepting interactions
+        of individuals free from discrimination and harassment.</p>
+
+      <p>As openly lesbian, gay, bisexual, transgender, queer, intersex, asexual, and other gender/sexual minority (LGBTQIA+)
+        members of the astronomical community, we strongly believe that there is no place for discrimination based on sexual
+        orientation/preference or gender identity/expression. We want to actively maintain and promote a safe, accepting
+        and supportive environment in all our work places. We invite other LGBTQIA+ members of the astronomical community
+        to join us in being visible and to reach out to those who still feel that it is not yet safe for them to be public.</p>
+
+      <p>As experts, TAs, instructors, professors and technical staff, we serve as professional role models every day. Let us
+        also become positive examples of members of the LGBTQIA+ community at large.</p>
+
+      <p>For members of the non-LGBTQIA+ community, we invite you to make visible your acceptance of LGBTQIA+ people. We urge
+        you to make visible (and audible) your objections to derogatory comments and "jokes" about LGBTQIA+ people.</p>
+
+      <p>In the light of the above statements, we, your fellow students, alumni/ae, faculty, coworkers, and friends, sign this
+        message.
+      </p>
+
+      <p class="note">
+        <b>Please
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSe2_4LfW4LasdOPiUEzQfRSisN8B2rVQoDJoUt8LznQw-YM0w/viewform">fill out this form <img src="static/ic_edit.png" /></a>
+          to add yourself to the lists or to update/remove your information.</b><br/>
+          The information you provided will be sent to current maintainers: <a href="https://yymao.github.io/">Yao-Yuan Mao</a> (Pittsburgh) and <a href="http://web.physics.ucsb.edu/~blaes">Omer Blaes</a> (UCSB).
+      </p>
+    </div>
+
+    <a name="outlist"><h2>The Outlist</h2></a>
+    <div id="wait">Please wait while the list is being generated...</div>
+    <div id="outlist"></div>
+
+    <a name="allylist"><h2>The Ally List</h2></a>
+    <div id="allylist"></div>
+  </div>
+
+  <script>
+    const extractRow = function (raw_row) {
+      var row = new Object();
+      Object.entries(raw_row)
+        .filter(item => item[0].startsWith("gsx$"))
+        .forEach(item => { row[item[0].substr(4)] = item[1]["$t"]; });
+      return row;
+    };
+
+    const formatRow = function (row) {
+      var html = "";
+      html += "<div class='row'><div class='name'>";
+      html += row.firstname + " " + row.lastname;
+      if (row.email) html += " <a href='mailto:" + row.email + "' title='" + row.email + "'><img src='static/ic_email.png'/></a>";
+      if (row.website) html += " <a href='" + row.website + "' title='" + row.website + "'><img src='static/ic_web.png'/></a>";
+      html += "</div><div class='position'>";
+      html += row.position;
+      if (row.lastupdated) html += " <span title='Last updated'>(" + row.lastupdated + ")</span>";
+      html += "</div></div>";
+      return html;
+    };
+
+    const populateTable = function (data) {
+      var outlist = "";
+      var allylist = "";
+      data.feed.entry.forEach(raw_row => {
+        var row = extractRow(raw_row);
+        if (row.list == "outlist") outlist = outlist + formatRow(row);
+        else allylist = allylist + formatRow(row);
+      });
+      outlist = outlist + formatRow({ "firstname": "", "lastname": "", "position": "This space left blank for those who feel they cannot yet come out due to societal fear and ignorance." });
+      document.getElementById("outlist").innerHTML = outlist;
+      document.getElementById("allylist").innerHTML = allylist;
+      document.getElementById("wait").setAttribute("style", "display:none;");
+    };
+
+  </script>
 </body>
 
 </html>
