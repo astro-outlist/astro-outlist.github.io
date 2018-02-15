@@ -94,6 +94,19 @@
       }
     }
 
+    #outlist, #allylist{
+      border-left: 2px solid #ff8e00;
+    }
+
+    .outlist_header, .allylist_header{
+      border-left: 4px solid #ff8e00;
+      padding-left: 6px;
+    }
+
+    .allylist_header, #allylist{
+      border-left-color: #008e00;
+    }
+
     img {
       vertical-align: text-top;
     }
@@ -160,13 +173,13 @@
     </div>
 
     <a name="outlist">
-      <h2>The Outlist</h2>
+      <h2 class="outlist_header">The Outlist</h2>
     </a>
     <div id="wait">Please wait while the list is being generated...</div>
     <div id="outlist"></div>
 
     <a name="allylist">
-      <h2>The Ally List</h2>
+      <h2 class="allylist_header">The Ally List</h2>
     </a>
     <div id="allylist"></div>
   </div>
