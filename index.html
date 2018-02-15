@@ -96,6 +96,7 @@
 
     #outlist, #allylist{
       border-left: 2px solid #ff8e00;
+      margin-bottom: 36px;
     }
 
     .outlist_header, .allylist_header{
@@ -105,6 +106,11 @@
 
     .allylist_header, #allylist{
       border-left-color: #008e00;
+    }
+
+    #wait{
+      background-color: #eee;
+      padding: 4px 16px;
     }
 
     img {
@@ -175,13 +181,18 @@
     <a name="outlist">
       <h2 class="outlist_header">The Outlist</h2>
     </a>
-    <div id="wait">Please wait while the list is being generated...</div>
     <div id="outlist"></div>
 
     <a name="allylist">
       <h2 class="allylist_header">The Ally List</h2>
     </a>
     <div id="allylist"></div>
+
+    <div id="wait">
+      <h3>The lists are being generated...</h3>
+      <p>You need to enable javascript if the lists do not show up within a few seconds.
+      Or, you can <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRqhu1vXOh8VG-lIlAOUre35_81R2_VdnjM_nCjW-RIJ5v2SQVwwmGvxSxlnxNuRYgeYx8c_p0btJNo/pubhtml?gid=1567387772&amp;single=true">visit this page</a> to see the list (though not formatted prettily).</p>
+    </div>
   </div>
 
   <script>
