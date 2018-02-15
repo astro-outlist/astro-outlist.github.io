@@ -211,7 +211,7 @@
       var allylist = "";
       data.feed.entry.forEach(raw_row => {
         var row = extractRow(raw_row);
-        if (row.list == "outlist") outlist = outlist + formatRow(row);
+        if (row.list.toLowerCase().search("outlist") > -1) outlist = outlist + formatRow(row);
         else allylist = allylist + formatRow(row);
       });
       outlist = outlist + formatRow({ "firstname": "", "lastname": "", "position": "This space left blank for those who feel they cannot yet come out due to societal fear and ignorance." });
