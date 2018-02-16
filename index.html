@@ -113,6 +113,19 @@
       padding: 4px 16px;
     }
 
+    .lastupdated{
+      color: #999;
+      padding: 1px 4px;
+      border: 1px solid #999;
+      white-space: nowrap;
+      font-size: 80%;
+      vertical-align: middle;
+    }
+
+    .position_text{
+      margin-right: 6px;
+    }
+
     img {
       vertical-align: text-top;
     }
@@ -205,14 +218,12 @@
     };
 
     const formatRow = function (row) {
-      var html = "";
-      html += "<div class='row'><div class='name'>";
+      var html = "<div class='row'><div class='name'>";
       html += row.firstname + " " + row.lastname;
       if (row.email) html += " <a href='mailto:" + row.email + "' title='" + row.email + "'><img src='static/ic_email.png'/></a>";
       if (row.website) html += " <a href='" + row.website + "' title='" + row.website + "'><img src='static/ic_web.png'/></a>";
-      html += "</div><div class='position'>";
-      html += row.position;
-      if (row.lastupdated) html += " <span title='Last updated'>(" + row.lastupdated + ")</span>";
+      html += "</div><div class='position'><span class='position_text'>" + row.position + "</span>";
+      if (row.lastupdated) html += " <span class='lastupdated' title='Last updated'>" + row.lastupdated + "</span>";
       html += "</div></div>";
       return html;
     };
@@ -222,10 +233,10 @@
       var allylist = "";
       data.feed.entry.forEach(raw_row => {
         var row = extractRow(raw_row);
-        if (row.list.toLowerCase().search("outlist") > -1) outlist = outlist + formatRow(row);
-        else allylist = allylist + formatRow(row);
+        if (row.list.toLowerCase().search("outlist") > -1) outlist += formatRow(row);
+        else allylist += formatRow(row);
       });
-      outlist = outlist + formatRow({ "firstname": "", "lastname": "", "position": "This space left blank for those who feel they cannot yet come out due to societal fear and ignorance." });
+      outlist += formatRow({ "firstname": "", "lastname": "", "position": "This space left blank for those who feel they cannot yet come out due to societal fear and ignorance." });
       document.getElementById("outlist").innerHTML = outlist;
       document.getElementById("allylist").innerHTML = allylist;
       document.getElementById("wait").setAttribute("style", "display:none;");
