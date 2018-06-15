@@ -31,47 +31,43 @@
     }
 
     .content {
-      padding: 24px 16px;
+      padding: 32px 16px;
     }
 
-    .special{
+    .block {
+      padding: 8px 16px;
+      margin: 32px 0;
+    }
+
+    .special {
       background-color: #FFCCFF;
       color: #000;
       text-align: left;
       border: 5px double #000;
     }
 
-    .block {
-      padding: 16px;
-      margin-bottom: 36px;
-    }
-
-    .block p{
-      margin: 12px 0;
-    }
-
-    #outlist, #allylist{
-      width: 580px;
+    table {
+      max-width: 580px;
       margin: 24px auto;
       text-align: left;
       table-layout: fixed;
     }
 
-    td:first-child{
-      width: 150px;
+    th:first-child {
+      width: 25%;
     }
 
-    td:nth-child(2){
-      width: 160px;
+    th:nth-child(2) {
+      width: 30%;
     }
 
-    td:last-child{
-      width: 270px;
+    th:nth-child(3) {
+      width: 45%;
+    }
+
+    td {
+      max-width: 280px;
       word-wrap: break-word;
-    }
-
-    #wait{
-      padding: 4px 16px;
     }
 
     img {
@@ -83,13 +79,17 @@
 <body>
   <div class="content">
     <h1>Astronomy and Astrophysics Outlist</h1>
-    <p><img src="hline.gif"></p>
-    <h3><a href="..">Bring me back to the 21st century!</a></h3>
+    <p>
+      <img src="hline.gif">
+    </p>
+    <h3>
+      <a href="../">Bring me back to the 21st century!</a>
+    </h3>
     <div class="block special">
-      <p>As professionals in astronomy and astrophysics, whether we are students, faculty, staff, librarians or are working in other positions,
-        we all like to believe that our work environment is determined only by our capabilities as students and researchers,
-        and that it is free from personal bias. A productive professional atmosphere depends on open and accepting interactions
-        of individuals free from discrimination and harassment.</p>
+      <p>As professionals in astronomy and astrophysics, whether we are students, faculty, staff, librarians or are working
+        in other positions, we all like to believe that our work environment is determined only by our capabilities as students
+        and researchers, and that it is free from personal bias. A productive professional atmosphere depends on open and
+        accepting interactions of individuals free from discrimination and harassment.</p>
 
       <p>As openly lesbian, gay, bisexual, transgender, queer, intersex, asexual, and other gender/sexual minority (LGBTQIA+)
         members of the astronomical community, we strongly believe that there is no place for discrimination based on sexual
@@ -100,11 +100,14 @@
       <p>As experts, TAs, instructors, professors and technical staff, we serve as professional role models every day. Let us
         also become positive examples of members of the LGBTQIA+ community at large.</p>
 
-      <p>We also invite everyone in our community, regardless how you identify yourself, to become an ally and make visible your acceptance of LGBTQIA+ people.
-        We urge you to make visible (and audible) your objections to derogatory comments and "jokes" about LGBTQIA+ people.</p>
+      <p>We also invite everyone in our community, regardless how you identify yourself, to become an ally and make visible
+        your acceptance of LGBTQIA+ people. We urge you to make visible (and audible) your objections to derogatory comments
+        and "jokes" about LGBTQIA+ people.</p>
 
     </div>
-    <p><img src="hline.gif"></p>
+    <p>
+      <img src="hline.gif">
+    </p>
     <h3>In the light of the above statements, we, your fellow students, alumni/ae, faculty, coworkers, and friends, sign this
       message.
     </h3>
@@ -112,17 +115,35 @@
     <a name="outlist">
       <h2 class="outlist_header">The Outlist</h2>
     </a>
-    <table BORDER CELLSPACING=4 CELLPADDING=4 id="outlist"></table>
+    <table BORDER CELLSPACING=4 CELLPADDING=4>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Position/Affiliation</th>
+          <th>Web Page and/or Email</th>
+        </tr>
+      </thead>
+      <tbody id="outlist"></tbody>
+    </table>
 
     <a name="allylist">
       <h2 class="allylist_header">The Ally List</h2>
     </a>
-    <table BORDER CELLSPACING=4 CELLPADDING=4 id="allylist"></table>
+    <table BORDER CELLSPACING=4 CELLPADDING=4>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Position/Affiliation</th>
+          <th>Web Page and/or Email</th>
+        </tr>
+      </thead>
+      <tbody id="allylist"></tbody>
+    </table>
 
-    <div id="wait">
+    <div id="wait" class="block">
       <h3>The lists are being generated...</h3>
-      <p>You need to enable javascript if the lists do not show up within a few seconds.
-      Or, you can <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRqhu1vXOh8VG-lIlAOUre35_81R2_VdnjM_nCjW-RIJ5v2SQVwwmGvxSxlnxNuRYgeYx8c_p0btJNo/pubhtml?gid=1567387772&amp;single=true">visit this page</a> to see the list (though not formatted prettily).</p>
+      <p>You need to enable javascript if the lists do not show up within a few seconds. Or, you can
+        <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRqhu1vXOh8VG-lIlAOUre35_81R2_VdnjM_nCjW-RIJ5v2SQVwwmGvxSxlnxNuRYgeYx8c_p0btJNo/pubhtml?gid=1567387772&amp;single=true">visit this page</a> to see the list (though not formatted prettily).</p>
     </div>
 
     <div class="block">
@@ -134,8 +155,7 @@
 
       <p>The information you provided will be sent to current maintainers:
         <a href="https://yymao.github.io/">Yao-Yuan Mao</a> (Pittsburgh) and
-        <a href="http://web.physics.ucsb.edu/~blaes">Omer Blaes</a> (UCSB).
-        You can reach us by sending emails to
+        <a href="http://web.physics.ucsb.edu/~blaes">Omer Blaes</a> (UCSB). You can reach us by sending emails to
         <a href="mailto:astro-outlist@googlegroups.com">astro-outlist@googlegroups.com</a>.
       </p>
 
@@ -145,7 +165,10 @@
         <a href="https://arxiv.org/abs/1804.08406">LGBT+ Inclusivity Best Practices</a>
       </p>
     </div>
-    <p><img src="hline.gif"></p>
+
+    <p>
+      <img src="hline.gif">
+    </p>
 
   </div>
 
@@ -171,8 +194,8 @@
     };
 
     const populateTable = function (data) {
-      var outlist = "<tr><td>Name</td><td>Position/Affiliation</td><td>Web Page and/or Email</td></tr>";
-      var allylist = "<tr><td>Name</td><td>Position/Affiliation</td><td>Web Page and/or Email</td></tr>";
+      var outlist = "";
+      var allylist = "";
       data.feed.entry.forEach(raw_row => {
         var row = extractRow(raw_row);
         if (row.list.toLowerCase().search("outlist") > -1) outlist += formatRow(row);
