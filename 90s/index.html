@@ -163,7 +163,7 @@
       var info = [];
       html += row.firstname + " " + row.lastname;
       html += "</td><td>" + row.position;
-      if (row.lastupdated) html += " <span class='lastupdated' title='Last updated'>" + row.lastupdated + "</span>";
+      if (row.lastupdated) html += "<br>[updated " + row.lastupdated + "]";
       if (row.email) info.push(row.email);
       if (row.website) info.push("<a href='" + row.website + "'>" + row.website + "</a>");
       html += "</td><td>" + info.join("<br>") + "</td></tr>";
