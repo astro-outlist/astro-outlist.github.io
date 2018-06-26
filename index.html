@@ -109,6 +109,10 @@
       border-left-color: #008e00;
     }
 
+    #out_count, #ally_count{
+      margin-left: 0.33em;
+    }
+
     #wait{
       background-color: #eee;
       padding: 4px 16px;
@@ -202,12 +206,12 @@
     </div>
 
     <a name="outlist">
-      <h2 class="outlist_header">The Outlist</h2>
+      <h2 class="outlist_header">The Outlist <span id="out_count"></span></h2>
     </a>
     <div id="outlist"></div>
 
     <a name="allylist">
-      <h2 class="allylist_header">The Ally List</h2>
+      <h2 class="allylist_header">The Ally List <span id="ally_count"></span></h2>
     </a>
     <div id="allylist"></div>
 
@@ -245,14 +249,23 @@
     const populateTable = function (data) {
       var outlist = "";
       var allylist = "";
+      var out_count = 0, ally_count = 0;
       data.feed.entry.forEach(raw_row => {
         var row = extractRow(raw_row);
-        if (row.list.toLowerCase().search("outlist") > -1) outlist += formatRow(row);
-        else allylist += formatRow(row);
+        if (row.list.toLowerCase().search("outlist") > -1) {
+          outlist += formatRow(row);
+          out_count += 1;
+        }
+        else {
+          allylist += formatRow(row);
+          ally_count += 1;
+        }
       });
       outlist += formatRow({ "firstname": "", "lastname": "", "position": "This space left blank for those who feel they cannot yet come out due to societal fear and ignorance." });
       document.getElementById("outlist").innerHTML = outlist;
       document.getElementById("allylist").innerHTML = allylist;
+      document.getElementById("out_count").innerHTML = "(" + out_count + " entries)";
+      document.getElementById("ally_count").innerHTML = "(" + ally_count + " entries)";
       document.getElementById("wait").setAttribute("style", "display:none;");
     };
 
