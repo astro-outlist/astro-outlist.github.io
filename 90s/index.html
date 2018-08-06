@@ -24,9 +24,7 @@
       text-align: center;
     }
 
-    a:link,
-    a:link:hover,
-    a:visited {
+    a:any-link {
       color: #FFCCFF;
     }
 
@@ -70,21 +68,44 @@
       word-wrap: break-word;
     }
 
-    img {
-      vertical-align: text-top;
+    #top-block{
+      background-color: rgba(255, 255, 255, 0.85);
+      position: sticky;
+      top: -1px;
     }
+
+    .top-text{
+      color: #333;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: justify;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 24px 16px;
+    }
+
+    .top-text a:any-link{
+      color: #0CB0FF;
+      font-weight: bold;
+    }
+
   </style>
 </head>
 
 <body>
+  <div id="top-block">
+      <div class="top-text">
+        <b>A brief history of the Astronomy and Astrophysics Outlist</b><br><br>
+        Shown below is how the appearance of the Astronomy and Astrophysics Outlist site looked before 2018. This list first went live in August 1998. It was based on similar outlists that existed for people at the University of California&ndash;Los Angeles, the California Institute of Technology, and the Jet Propulsion Laboratory. As far as we know, the American astronomers' LGBTQIA+ community first started to network together using an email distribution list that was formed in November 1992 as a result of efforts by four astronomy graduate students at the time.  People then started organizing and getting together at the January 1993 American Astronomical Society (AAS) Meeting in Phoenix and the June 1993 AAS Meeting in Berkeley. The group continued to grow thanks to announcements in various newsgroups and the AAS newsletter. In 1998, the idea for an outlist webpage was born. This page was eventually linked into the AAS website, and the AAS established a Working Group on LGBTQIA+ equality (WGLE), now the AAS Committee for Sexual-Orientation and Gender Minorities in Astronomy (SGMA), in November 2012.<br><br>
+        While that is the American history, we recognize that astronomy is an international enterprise, and we welcome and celebrate the lives of all human beings in our international astronomical community. You will find that there are already many signatures here coming from institutes all around the world.<br><br>
+        <a href="#" onclick="(function(){document.getElementById('top-block').hidden=true;})(); return false;">Hide</a> |
+        <a href="../">Bring me back to the 21st century!</a>
+      </div>
+  </div>
   <div class="content">
     <h1>Astronomy and Astrophysics Outlist</h1>
     <p>
       <img src="hline.gif">
     </p>
-    <h3>
-      <a href="../">Bring me back to the 21st century!</a>
-    </h3>
     <div class="block special">
       <p>As professionals in astronomy and astrophysics, whether we are students, faculty, staff, librarians or are working
         in other positions, we all like to believe that our work environment is determined only by our capabilities as students
@@ -155,7 +176,7 @@
 
       <p>The information you provided will be sent to current maintainers:
         <a href="https://yymao.github.io/">Yao-Yuan Mao</a> (Pittsburgh) and
-        <a href="http://web.physics.ucsb.edu/~blaes">Omer Blaes</a> (UCSB). You can reach us by sending emails to
+        <a href="http://web.physics.ucsb.edu/~blaes">Omer Blaes</a> (UCSB). You can also reach us at
         <a href="mailto:astro-outlist@googlegroups.com">astro-outlist@googlegroups.com</a>.
       </p>
 
