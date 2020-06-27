@@ -121,6 +121,12 @@
       padding: 12px 16px;
       text-align: center;
     }
+
+    .annotation {
+      border-bottom: 1px dashed #FFCCFF;
+      cursor: help;
+    }
+
   </style>
 </head>
 
@@ -282,7 +288,9 @@
       var info = [];
       html += row.firstname + " " + row.lastname;
       html += "</td><td>" + row.position;
-      if (row.lastupdated) html += "<br>[updated " + row.lastupdated + "]";
+      if (row.nonbinary || row.lastupdated) html += "<br>";
+      if (row.nonbinary) html += "<span class='annotation' title='Self-identified as non-cisgender, non-binary, and/or genderqueer'>[NB]</span>";
+      if (row.lastupdated) html += "<span class='annotation' title='Last updated'>[" + row.lastupdated + "]";
       if (row.email) info.push(row.email);
       if (row.website) info.push("<a href='" + row.website + "'>" + row.website + "</a>");
       html += "</td><td>" + info.join("<br>") + "</td></tr>";

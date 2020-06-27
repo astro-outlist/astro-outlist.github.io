@@ -122,13 +122,14 @@
       margin-bottom: 36px;
     }
 
-    .lastupdated {
+    .annotation {
       color: #999;
       padding: 1px 4px;
       border: 1px solid #999;
       white-space: nowrap;
       font-size: 80%;
       vertical-align: middle;
+      cursor: help;
     }
 
     .position_text {
@@ -266,7 +267,8 @@
       if (row.email) html += " <a href='mailto:" + row.email + "' title='" + row.email + "'><img src='static/ic_email.png'/></a>";
       if (row.website) html += " <a href='" + row.website + "' title='" + row.website + "'><img src='static/ic_web.png'/></a>";
       html += "</div><div class='position'><span class='position_text'>" + row.position + "</span>";
-      if (row.lastupdated) html += " <span class='lastupdated' title='Last updated'>" + row.lastupdated + "</span>";
+      if (row.nonbinary) html += " <span class='annotation' title='Self-identified as non-cisgender, non-binary, and/or genderqueer'>NB</span>";
+      if (row.lastupdated) html += " <span class='annotation' title='Last updated'>" + row.lastupdated + "</span>";
       html += "</div></div>";
       return html;
     };
