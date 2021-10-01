@@ -7,10 +7,6 @@
     content="Outlist and ally list for LGBTQIA+ members in the astronomy and astrophysics community">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Astronomy and Astrophysics Outlist</title>
-  <script async defer
-    src="https://spreadsheets.google.com/feeds/list/1r5hsZlu4k-pEcNRFeFZkuHVzq5G0oGbIaPpKoOqDk00/ohl7taw/public/values?alt=json-in-script&amp;callback=populateOutlist"></script>
-  <script async defer
-    src="https://spreadsheets.google.com/feeds/list/1r5hsZlu4k-pEcNRFeFZkuHVzq5G0oGbIaPpKoOqDk00/o9bl040/public/values?alt=json-in-script&amp;callback=populateAllylist"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-32378628-5"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -213,11 +209,10 @@
     </table>
 
     <div id="outlist_wait" class="wait">
-      <h3>The outlist is being generated...</h3>
-      <p>You need to enable javascript if the lists do not show up within a few seconds.
-        Or, you can <a
+      <h3>October 2021 Update:</h3>
+      <p>The Google Sheet API used to display the Outlist has been retired. We are working on a fix. For the time being, <b>please <a
           href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRqhu1vXOh8VG-lIlAOUre35_81R2_VdnjM_nCjW-RIJ5v2SQVwwmGvxSxlnxNuRYgeYx8c_p0btJNo/pubhtml?gid=1063561410&amp;single=true">visit
-          this page</a> to see the list (though not formatted prettily).</p>
+          this page</a> to see the Outlist</b> (though not formatted prettily). You can still join the list as usual.</p>
     </div>
 
     <h2 id="allylist" class="header">The Ally List <span id="allylist_count" class="count"></span></h2>
@@ -232,11 +227,10 @@
       <tbody id="allylist_table"></tbody>
     </table>
     <div id="allylist_wait" class="wait">
-      <h3>The ally list is being generated...</h3>
-      <p>You need to enable javascript if the lists do not show up within a few seconds.
-        Or, you can <a
+      <h3>October 2021 Update:</h3>
+      <p>The Google Sheet API used to display the Ally List has been retired. We are working on a fix. For the time being, <b>please <a
           href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRqhu1vXOh8VG-lIlAOUre35_81R2_VdnjM_nCjW-RIJ5v2SQVwwmGvxSxlnxNuRYgeYx8c_p0btJNo/pubhtml?gid=563651338&amp;single=true">visit
-          this page</a> to see the list (though not formatted prettily).</p>
+          this page</a> to see the Ally List</b> (though not formatted prettily). You can still join the list as usual.</p>
     </div>
 
     <div class="block">
@@ -275,52 +269,6 @@
 
   </div>
 
-  <script>
-    const extractRow = function (raw_row) {
-      var row = new Object();
-      Object.entries(raw_row)
-        .filter(item => item[0].startsWith("gsx$"))
-        .forEach(item => { row[item[0].substr(4)] = item[1]["$t"]; });
-      return row;
-    };
-
-    const formatRow = function (row) {
-      var html = "<tr><td>";
-      var info = [];
-      html += row.firstname + " " + row.lastname;
-      html += "</td><td>" + row.position;
-      if (row.nonbinary || row.lastupdated) html += "<br>";
-      if (row.nonbinary) html += "<span class='annotation' title='Self-identified as non-binary, non-cisgender, and/or genderqueer'>[Non-binary/non-cis]</span>";
-      if (row.lastupdated) html += "<span class='annotation' title='Last updated'>[" + row.lastupdated + "]";
-      if (row.email) info.push(row.email);
-      if (row.website) info.push("<a href='" + row.website + "'>" + row.website + "</a>");
-      html += "</td><td>" + info.join("<br>") + "</td></tr>";
-      return html;
-    };
-
-    const processData = function (data) {
-      return {
-        "content": data.feed.entry.map(row => formatRow(extractRow(row))).join(""),
-        "count": data.feed.entry.length
-      }
-    };
-
-    const populateOutlist = function (data) {
-      var content = processData(data);
-      content.content += formatRow({ "firstname": "", "lastname": "", "position": "This space left blank for those who feel they cannot yet come out due to societal fear and ignorance." });
-      document.getElementById("outlist_table").innerHTML = content.content;
-      document.getElementById("outlist_count").innerHTML = "(" + content.count + " entries)";
-      document.getElementById("outlist_wait").setAttribute("style", "display:none;");
-    };
-
-    const populateAllylist = function (data) {
-      var content = processData(data);
-      document.getElementById("allylist_table").innerHTML = content.content;
-      document.getElementById("allylist_count").innerHTML = "(" + content.count + " entries)";
-      document.getElementById("allylist_wait").setAttribute("style", "display:none;");
-    };
-
-  </script>
 </body>
 
 </html>
