@@ -227,25 +227,72 @@
     <h2 id="outlist" class="header">The Outlist <span id="outlist_count" class="count"></span></h2>
     <div id="outlist_table" class="table"></div>
     <div id="outlist_wait" class="wait">
-      <h3>October 2021 Update:</h3>
-      <p>The Google Sheet API used to display the Outlist has been retired. We are working on a fix. For the time being, <b>please <a
-          href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRqhu1vXOh8VG-lIlAOUre35_81R2_VdnjM_nCjW-RIJ5v2SQVwwmGvxSxlnxNuRYgeYx8c_p0btJNo/pubhtml?gid=1063561410&amp;single=true">visit
-          this page</a> to see the Outlist</b> (though not formatted prettily). You can still join the list as usual.</p>
+      <h3>The Outlist is being generated...</h3>
+      <p>You may need to enable javascript if the list does not show up within a few seconds. You can also <a
+          href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDYnG3wS158-G5Samp4opJzM0mCWEyhTtZw-4liCpN4inZ9aXo0XnGD3JpYA0DwS3uzpEt5tNDuTRe/pubhtml?gid=1407953020&single=true">visit
+          this page</a> to see the Outlist (though not formatted prettily). You can still join the list as usual.</p>
     </div>
 
     <h2 id="allylist" class="header">The Ally List <span id="allylist_count" class="count"></span></h2>
     <div id="allylist_table" class="table"></div>
     <div id="allylist_wait" class="wait">
-      <h3>October 2021 Update:</h3>
-      <p>The Google Sheet API used to display the Ally List has been retired. We are working on a fix. For the time being, <b>please <a
-          href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRqhu1vXOh8VG-lIlAOUre35_81R2_VdnjM_nCjW-RIJ5v2SQVwwmGvxSxlnxNuRYgeYx8c_p0btJNo/pubhtml?gid=563651338&amp;single=true">visit
-          this page</a> to see the Ally List</b> (though not formatted prettily). You can still join the list as usual.</p>
+      <h3>The Ally List is being generated...</h3>
+      <p>You may need to enable javascript if the list does not show up within a few seconds. You can also <a
+          href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDYnG3wS158-G5Samp4opJzM0mCWEyhTtZw-4liCpN4inZ9aXo0XnGD3JpYA0DwS3uzpEt5tNDuTRe/pubhtml?gid=1888211415&single=true">visit
+          this page</a> to see the Ally List (though not formatted prettily). You can still join the list as usual.</p>
     </div>
 
     <div class="footer">
       This site makes use of <a href="https://support.google.com/analytics/answer/6004245">Google Analytics</a>.
     </div>
   </div>
+
+  <script src="https://apis.google.com/js/api.js"></script>
+  <script>
+  const formatRow = function (row) {
+    // 0:lastupdated, 1:firstname, 2:lastname, 3:position, 4:website, 5:email, 6:nonbinary
+    var html = "<div class='row'><div class='name'>";
+    html += row[1] + " " + row[2];
+    if (row[5]) html += " <a href='mailto:" + row[5] + "' title='" + row[5] + "'><img src='static/ic_email.png'/></a>";
+    if (row[4]) html += " <a href='" + row[4] + "' title='" + row[4] + "'><img src='static/ic_web.png'/></a>";
+    html += "</div><div class='position'><span class='position_text'>" + row[3] + "</span>";
+    if (row[6]) html += " <span class='annotation' title='Self-identified as non-binary, non-cisgender, and/or genderqueer'>Non-binary/non-cis</span>";
+    if (row[0]) html += " <span class='annotation' title='Last updated'>" + row[0] + "</span>";
+    html += "</div></div>";
+    return html;
+  };
+
+  const renderData = function(listname, data_array, count_adjust = 0){
+    document.getElementById(listname + "_table").innerHTML = data_array.map(formatRow).join("");
+    document.getElementById(listname + "_count").innerHTML = "(" + (data_array.length + count_adjust) + " entries)";
+    document.getElementById(listname + "_wait").setAttribute("style", "display:none;");
+  }
+
+  gapi.load('client', function(){
+    gapi.client.init({
+      apiKey: 'AIzaSyAVpCwgT1MqDEsntmyaqHhgGMpXFa04bg0',
+      discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+    }).then(function(){
+      var spreadsheet_id = '1hgBsfaKogTvGHQ9NP8H-FJDgBZ-AR07ffUzBFs3VjFc';
+      //Load Outlist
+      gapi.client.sheets.spreadsheets.values.get({
+        spreadsheetId: spreadsheet_id,
+        range: 'outlist!A2:G1000',
+      }).then(function(response){
+        var data = response.result.values;
+        data.push(["", "", "", "This space left blank for those who feel they cannot yet come out due to societal fear and ignorance."]);
+        renderData("outlist", data, -1);
+      });
+      //Load Ally List
+      gapi.client.sheets.spreadsheets.values.get({
+        spreadsheetId: spreadsheet_id,
+        range: 'allylist!A2:F1000',
+      }).then(function(response){
+        renderData("allylist", response.result.values);
+      });
+    });
+  });
+  </script>
 
 </body>
 
