@@ -273,22 +273,14 @@
       apiKey: 'AIzaSyAVpCwgT1MqDEsntmyaqHhgGMpXFa04bg0',
       discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
     }).then(function(){
-      var spreadsheet_id = '1hgBsfaKogTvGHQ9NP8H-FJDgBZ-AR07ffUzBFs3VjFc';
-      //Load Outlist
-      gapi.client.sheets.spreadsheets.values.get({
-        spreadsheetId: spreadsheet_id,
-        range: 'outlist!A2:G1000',
+      gapi.client.sheets.spreadsheets.values.batchGet({
+        spreadsheetId: "1hgBsfaKogTvGHQ9NP8H-FJDgBZ-AR07ffUzBFs3VjFc",
+        ranges: ["outlist!A2:G1000", "allylist!A2:F1000"],
       }).then(function(response){
-        var data = response.result.values;
-        data.push(["", "", "", "This space left blank for those who feel they cannot yet come out due to societal fear and ignorance."]);
-        renderData("outlist", data, -1);
-      });
-      //Load Ally List
-      gapi.client.sheets.spreadsheets.values.get({
-        spreadsheetId: spreadsheet_id,
-        range: 'allylist!A2:F1000',
-      }).then(function(response){
-        renderData("allylist", response.result.values);
+        var outlist_arr = response.result.valueRanges[0].values;
+        outlist_arr.push(["", "", "", "This space left blank for those who feel they cannot yet come out due to societal fear and ignorance."]);
+        renderData("outlist", outlist_arr, -1);
+        renderData("allylist", response.result.valueRanges[1].values);
       });
     });
   });
