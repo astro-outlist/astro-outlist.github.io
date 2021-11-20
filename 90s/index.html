@@ -287,43 +287,48 @@
   </div>
   <script src="https://apis.google.com/js/api.js"></script>
   <script>
-  const formatRow = function (row) {
-    // 0:lastupdated, 1:firstname, 2:lastname, 3:position, 4:website, 5:email, 6:nonbinary
-    var html = "<tr><td>";
-    var info = [];
-    html += row[1] + " " + row[2];
-    html += "</td><td>" + row[3];
-    if (row[6] || row[0]) html += "<br>";
-    if (row[6]) html += "<span class='annotation' title='Self-identified as non-binary, non-cisgender, and/or genderqueer'>[Non-binary/non-cis]</span>";
-    if (row[0]) html += "<span class='annotation' title='Last updated'>[" + row[0] + "]";
-    if (row[5]) info.push(row[5]);
-    if (row[4]) info.push("<a href='" + row[4] + "'>" + row[4] + "</a>");
-    html += "</td><td>" + info.join("<br>") + "</td></tr>";
-    return html;
-  };
+    const listnames = ["outlist", "allylist"];
 
-  const renderData = function(listname, data_array, count_adjust = 0){
-    document.getElementById(listname + "_table").innerHTML = data_array.map(formatRow).join("");
-    document.getElementById(listname + "_count").innerHTML = "(" + (data_array.length + count_adjust) + " entries)";
-    document.getElementById(listname + "_wait").setAttribute("style", "display:none;");
-  }
+    const formatRow = function (row) {
+      // 0:lastupdated, 1:firstname, 2:lastname, 3:position, 4:website, 5:email, 6:nonbinary
+      var html = "<tr><td>";
+      var info = [];
+      html += row[1] + " " + row[2];
+      html += "</td><td>" + row[3];
+      if (row[6] || row[0]) html += "<br>";
+      if (row[6]) html += "<span class='annotation' title='Self-identified as non-binary, non-cisgender, and/or genderqueer'>[Non-binary/non-cis]</span>";
+      if (row[0]) html += "<span class='annotation' title='Last updated'>[" + row[0] + "]";
+      if (row[5]) info.push(row[5]);
+      if (row[4]) info.push("<a href='" + row[4] + "'>" + row[4] + "</a>");
+      html += "</td><td>" + info.join("<br>") + "</td></tr>";
+      return html;
+    };
 
-  gapi.load('client', function(){
-    gapi.client.init({
-      apiKey: 'AIzaSyAVpCwgT1MqDEsntmyaqHhgGMpXFa04bg0',
-      discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
-    }).then(function(){
-      gapi.client.sheets.spreadsheets.values.batchGet({
-        spreadsheetId: "1hgBsfaKogTvGHQ9NP8H-FJDgBZ-AR07ffUzBFs3VjFc",
-        ranges: ["outlist!A2:G1000", "allylist!A2:F1000"],
-      }).then(function(response){
-        var outlist_arr = response.result.valueRanges[0].values;
-        outlist_arr.push(["", "", "", "This space left blank for those who feel they cannot yet come out due to societal fear and ignorance."]);
-        renderData("outlist", outlist_arr, -1);
-        renderData("allylist", response.result.valueRanges[1].values);
+    const renderData = function(listname, data_array){
+      document.getElementById(listname + "_table").innerHTML = data_array.map(formatRow).join("");
+      document.getElementById(listname + "_count").innerHTML = "(" + (data_array.length) + " entries)";
+      document.getElementById(listname + "_wait").setAttribute("style", "display:none;");
+    };
+
+    const main = function(response){
+      listnames.forEach((listname, i) => {
+        var data = response.result.valueRanges[i].values;
+        if (!i) data.push(["", "", "", "This space left blank for those who feel they cannot yet come out due to societal fear and ignorance."]);
+        renderData(listname, data);
+      });
+    };
+
+    gapi.load('client', function(){
+      gapi.client.init({
+        apiKey: 'AIzaSyAVpCwgT1MqDEsntmyaqHhgGMpXFa04bg0',
+        discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+      }).then(function(){
+        gapi.client.sheets.spreadsheets.values.batchGet({
+          spreadsheetId: "1hgBsfaKogTvGHQ9NP8H-FJDgBZ-AR07ffUzBFs3VjFc",
+          ranges: ["outlist!A2:G1000", "allylist!A2:F1000"],
+        }).then(main);
       });
     });
-  });
   </script>
 </body>
 
