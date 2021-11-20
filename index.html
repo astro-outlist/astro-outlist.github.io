@@ -54,14 +54,7 @@
 
     .row {
       padding: 8px 6px;
-    }
-
-    .row:nth-child(odd) {
-      background-color: #eee;
-    }
-
-    .row:hover {
-      background-color: #ddd;
+      display: none;
     }
 
     .name,
@@ -111,7 +104,6 @@
     }
 
     @media (max-width: 760px) {
-
       .name,
       .position {
         width: 100%;
@@ -164,6 +156,18 @@
     .footer {
       text-align: center;
       font-size: 80%;
+    }
+
+    .show{
+      display: block;
+    }
+
+    input#search{
+      display: block;
+      margin: 2em 0em;
+      padding: 0.4em;
+      width:100%;
+      max-width: 400px;
     }
   </style>
 </head>
@@ -260,6 +264,8 @@
       </p>
     </div>
 
+    <input id="search" type="search" placeholder="&#x1F50D; Type to search the lists">
+
     <h2 id="outlist" class="header">The Outlist <span id="outlist_count" class="count"></span></h2>
     <div id="outlist_table" class="table"></div>
     <div id="outlist_wait" class="wait">
@@ -285,11 +291,11 @@
   <script>
   const formatRow = function (row) {
     // 0:lastupdated, 1:firstname, 2:lastname, 3:position, 4:website, 5:email, 6:nonbinary
-    var html = "<div class='row'><div class='name'>";
+    var html = "<div class='row show'><div class='name'>";
     html += row[1] + " " + row[2];
     if (row[5]) html += " <a href='mailto:" + row[5] + "' title='" + row[5] + "'><img src='static/ic_email.png'/></a>";
     if (row[4]) html += " <a href='" + row[4] + "' title='" + row[4] + "'><img src='static/ic_web.png'/></a>";
-    html += "</div><div class='position'><span class='position_text'>" + row[3] + "</span>";
+    html += "</div> <div class='position'><span class='position_text'>" + row[3] + "</span>";
     if (row[6]) html += " <span class='annotation' title='Self-identified as non-binary, non-cisgender, and/or genderqueer'>Non-binary/non-cis</span>";
     if (row[0]) html += " <span class='annotation' title='Last updated'>" + row[0] + "</span>";
     html += "</div></div>";
@@ -300,7 +306,43 @@
     document.getElementById(listname + "_table").innerHTML = data_array.map(formatRow).join("");
     document.getElementById(listname + "_count").innerHTML = "(" + (data_array.length + count_adjust) + " entries)";
     document.getElementById(listname + "_wait").setAttribute("style", "display:none;");
-  }
+  };
+
+  const show_row = function(row){
+    row.classList.add("show");
+  };
+
+  const hide_row = function(row){
+    row.classList.remove("show");
+  };
+
+  const alter_row_colors = function(row, i){
+    row.dataset.color = (i % 2) ? "#fff" : "#eee";
+    row.style.backgroundColor = row.dataset.color;
+  };
+
+  const filterData = function(text){
+    if (text && text.trim()){
+      var t = text.toLowerCase();
+      document.querySelectorAll(".row").forEach((row) => {
+        if (row.textContent.toLowerCase().indexOf(t) > -1) { show_row(row); }
+        else { hide_row(row); }
+      });
+    }
+    else{
+      document.querySelectorAll(".row").forEach(show_row);
+    }
+    document.querySelectorAll("#outlist_table > .show").forEach(alter_row_colors);
+    document.querySelectorAll("#allylist_table > .show").forEach(alter_row_colors);
+    set_entry_counts();
+  };
+
+  const set_entry_counts = function(){
+    ["outlist", "allylist"].forEach((listname) => {
+      var count = document.querySelectorAll("#" + listname + "_table > .show").length;
+      document.getElementById(listname + "_count").innerHTML = "(" + count + " entr" + (count == 1 ? "y":"ies") + ")";
+    });
+  };
 
   gapi.load('client', function(){
     gapi.client.init({
@@ -311,10 +353,24 @@
         spreadsheetId: "1hgBsfaKogTvGHQ9NP8H-FJDgBZ-AR07ffUzBFs3VjFc",
         ranges: ["outlist!A2:G1000", "allylist!A2:F1000"],
       }).then(function(response){
-        var outlist_arr = response.result.valueRanges[0].values;
-        outlist_arr.push(["", "", "", "This space left blank for those who feel they cannot yet come out due to societal fear and ignorance."]);
-        renderData("outlist", outlist_arr, -1);
-        renderData("allylist", response.result.valueRanges[1].values);
+        ["outlist", "allylist"].forEach((listname, i) => {
+          var data = response.result.valueRanges[i].values;
+          if (listname == "outlist") {
+            data.push(["", "", "", "This space left blank for those who feel they cannot yet come out due to societal fear and ignorance."]);
+          }
+          renderData(listname, data);
+          document.querySelectorAll("#" + listname + "_table > .show").forEach(alter_row_colors);
+        });
+
+        set_entry_counts();
+
+        document.querySelectorAll(".row").forEach((row) => {
+          row.addEventListener("mouseenter", () => {row.style.backgroundColor = "#ddd";});
+          row.addEventListener("mouseleave", () => {row.style.backgroundColor = row.dataset.color;});
+        });
+
+        var search_box = document.getElementById("search");
+        search_box.addEventListener("input", () => {filterData(search_box.value);});
       });
     });
   });
