@@ -94,7 +94,7 @@
 
     #top-block {
       max-height: 50px;
-      background-color: #FFDDFFCC;
+      background-color: #ffddffdd;
       position: sticky;
       top: -1px;
       overflow-y: auto;
@@ -102,18 +102,15 @@
       cursor: pointer;
     }
 
-    #top-block:hover,
     #top-block.expand {
       max-height: 95vh;
       cursor: auto;
     }
 
-    #top-block:hover .top-text.expand,
     #top-block.expand .top-text.expand {
       display: block;
     }
 
-    #top-block:hover .top-text.hidden,
     #top-block.expand .top-text.hidden {
       display: none;
     }
@@ -149,9 +146,9 @@
 
 <body>
   <div id="top-block" class="expand">
-    <div class="top-text hidden"><a href="#">What's going on here?</a></div>
+    <div class="top-text hidden"><a href="#" onclick="document.getElementById('top-block').classList.add('expand'); return false;">Learn about Astro Outlist's history</a> | <a href="../">Back to the 21st century</a></div>
     <div class="top-text expand">
-      <b>Here's a brief history of the Astronomy and Astrophysics Outlist</b><br><br>
+      <b>A brief history of the Astronomy and Astrophysics Outlist</b><br><br>
       Shown below is how the appearance of the Astronomy and Astrophysics Outlist site looked before 2018. This list
       first went live in August 1998. It was based on similar outlists that existed for people at the University of
       California&ndash;Los Angeles, the California Institute of Technology, and the Jet Propulsion Laboratory. At that
@@ -167,17 +164,17 @@
       celebrate the lives of all human beings in our international astronomical community. You will find that there are
       already many signatures here coming from institutes all around the world.<br><br>
       <a href="#"
-        onclick="let cl = document.getElementById('top-block').classList; cl.toggle('expand'); this.innerHTML=(cl.contains('expand')?'Hide':'Pin'); return false;">Hide</a>
+      onclick="document.getElementById('top-block').classList.remove('expand'); return false;">Hide this box</a>
       |
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSe2_4LfW4LasdOPiUEzQfRSisN8B2rVQoDJoUt8LznQw-YM0w/viewform">Join
         the list</a> |
-      <a href="../">Bring me back to the 21st century!</a>
+      <a href="../">Back to the 21st century!</a>
     </div>
   </div>
   <div class="content">
     <h1>Astronomy and Astrophysics Outlist</h1>
     <p>
-      <img src="hline.gif">
+      <img style="width: 100%;" src="hline.gif">
     </p>
     <div class="block special">
       <p>As professionals in astronomy and astrophysics, whether we are students, faculty, staff, librarians or are
@@ -210,7 +207,7 @@
 
     </div>
     <p>
-      <img src="hline.gif">
+      <img width="100%" src="hline.gif">
     </p>
     <h3>In the light of the above statements, we, your fellow students, alumni/ae, faculty, coworkers, and friends, sign
       this
@@ -280,7 +277,7 @@
     </div>
 
     <p>
-      <img src="hline.gif">
+      <img style="width: 100%;" src="hline.gif">
     </p>
 
     <div class="footer">
