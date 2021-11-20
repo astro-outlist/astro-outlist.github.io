@@ -1,9 +1,14 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en">
 
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+  <link rel="preconnect" href="https://apis.google.com" />
+  <link rel="preconnect" href="https://content-sheets.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <title>Astronomy and Astrophysics Outlist</title>
   <meta name="description"
     content="Outlist and ally list for LGBTQIA+ members in the astronomy and astrophysics community">
@@ -32,12 +37,13 @@
     gtag('config', 'UA-32378628-5');
   </script>
   <meta name="google-site-verification" content="OoP0puiFUTsizS0hzohiNIHBsR4Z48rJDjhVlTW6lrs">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.1.0/modern-normalize.min.css" integrity="sha512-wpPYUAdjBVSE4KJnH1VR1HeZfpl1ub8YT/NKx4PuQ5NmX2tKuGu6U/JRp5y+Y8XG2tV+wKQpNHVUX03MfMFn9Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
-    html {
-      font-family: Arial, Helvetica, sans-serif;
+    html, body{
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      font-size: 96%;
     }
-
     body {
       color: #333;
     }
@@ -47,7 +53,7 @@
     }
 
     .content {
-      max-width: 1000px;
+      max-width: 1020px;
       margin: 0 auto;
       padding: 0 16px 240px 16px;
     }
@@ -93,6 +99,10 @@
 
     nav {
       margin-bottom: 24px;
+    }
+
+    nav > a {
+      display: inline-block;
     }
 
     .block {
@@ -198,9 +208,9 @@
     <nav>
       <a href="#outlist">Outlist</a> |
       <a href="#allylist">Ally List</a> |
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSe2_4LfW4LasdOPiUEzQfRSisN8B2rVQoDJoUt8LznQw-YM0w/viewform">Join/update
-        the list</a> |
-      <a href="90s/">History of this Outlist</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSe2_4LfW4LasdOPiUEzQfRSisN8B2rVQoDJoUt8LznQw-YM0w/viewform">Join/Update</a> |
+      <a href="90s/">History</a> |
+      <a href="#search">Search</a>
     </nav>
     <div class="block">
       <p>As professionals in astronomy and astrophysics, whether we are students, faculty, staff, librarians or are
@@ -246,7 +256,7 @@
 
       <p>The information you provided will be sent to current maintainers:
         <a href="https://yymao.github.io/">Yao-Yuan Mao</a> (Rutgers) and
-        <a href="http://web.physics.ucsb.edu/~blaes">Omer Blaes</a> (UCSB).
+        <a href="https://web.physics.ucsb.edu/~blaes">Omer Blaes</a> (UCSB).
         You can also reach us at <img src="static/ic_email.png" />
         <a href="mailto:astro-outlist@googlegroups.com">astro-outlist@googlegroups.com</a>.
       </p>
@@ -264,6 +274,7 @@
       </p>
     </div>
 
+    <a name="search"></a>
     <input id="search_astro_outlist" type="search" placeholder="&#x1F50D; Type to search the lists">
 
     <h2 id="outlist" class="header">The Outlist <span id="outlist_count" class="count"></span></h2>
