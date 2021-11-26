@@ -39,22 +39,18 @@
     body {
       color: #333;
     }
-
     a:any-link {
       color: #0CB0FF;
     }
-
     .content {
       max-width: 1020px;
       margin: 0 auto;
       padding: 0 16px 240px 16px;
     }
-
     .row {
       padding: 8px 6px;
       display: none;
     }
-
     .name,
     .position {
       display: inline-block;
@@ -62,17 +58,14 @@
       padding: 0 3px;
       width: 72%;
     }
-
     .name {
       width: 25%;
     }
-
     .rainbow {
       width: 100%;
       height: 24px;
       top: -1px;
     }
-
     .rainbow div {
       width: 15.2%;
       height: 100%;
@@ -80,74 +73,59 @@
       padding: 0px;
       margin: 0;
     }
-
     .rainbow > div:nth-child(1), .rainbow > div:nth-child(8) {
       width: 4.4%
     }
-
     .rainbow > div > div {
       width: 25%;
     }
-
     nav {
       margin-bottom: 24px;
     }
-
     .link_block > a {
       display: inline-block;
       border-right: 1px solid #333;
       padding: 0.05em 0.5em 0.05em 0.2em;
     }
-
     .link_block > a:first-child {
       padding-left: 0;
     }
-
     .link_block > a:last-child {
       border-right: none;
       padding-right: 0;
     }
-
     .block {
       margin-bottom: 36px;
     }
-
     .block p {
       margin: 12px 0;
     }
-
     @media (max-width: 760px) {
       .name,
       .position {
         width: 100%;
       }
     }
-
     .table {
       border-left: 2px solid #ff8e00;
       margin-bottom: 36px;
     }
-
     .header {
       border-left: 4px solid #ff8e00;
       padding-left: 6px;
     }
-
     #allylist,
     #allylist_table {
       border-left-color: #008e00;
     }
-
     .count {
       margin-left: 0.33em;
     }
-
     .wait {
       background-color: #eee;
       padding: 4px 16px;
       margin-bottom: 36px;
     }
-
     .annotation {
       color: #999;
       padding: 1px 4px;
@@ -157,24 +135,19 @@
       vertical-align: middle;
       cursor: help;
     }
-
     .position_text {
       margin-right: 6px;
     }
-
     img {
       vertical-align: text-top;
     }
-
     .footer {
       text-align: center;
       font-size: 80%;
     }
-
     .show{
       display: block;
     }
-
     #search_astro_outlist{
       display: block;
       margin: 2em 0em;
@@ -213,7 +186,7 @@
       <a href="#allylist">Ally List</a>
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSe2_4LfW4LasdOPiUEzQfRSisN8B2rVQoDJoUt8LznQw-YM0w/viewform">Join/Update</a>
       <a href="90s/">History</a>
-      <a href="#search">Search</a>
+      <a href="#search" onclick="var e=document.getElementById('search_astro_outlist'); e.scrollIntoView(alignToTop=true); e.focus(); return false;">Search</a>
     </nav>
     <div class="block">
       <p>As professionals in astronomy and astrophysics, whether we are students, faculty, staff, librarians or are
