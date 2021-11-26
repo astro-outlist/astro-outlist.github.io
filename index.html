@@ -251,7 +251,7 @@
     </div>
 
     <a name="search"></a>
-    <input id="search_astro_outlist" type="search" placeholder="&#x1F50D; Type to search the lists">
+    <input id="search_astro_outlist" type="search" placeholder="&#x1F50D; Type to search the lists" disabled>
 
     <h2 id="outlist" class="header">The Outlist <span id="outlist_count" class="count"></span></h2>
     <div id="outlist_table" class="table"></div>
@@ -343,6 +343,7 @@
 
       var search_box = document.getElementById("search_astro_outlist");
       search_box.addEventListener("input", () => {filterData(search_box.value);});
+      search_box.disabled = false;
     };
 
     gapi.load('client', function(){
