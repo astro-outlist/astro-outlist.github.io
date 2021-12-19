@@ -285,8 +285,9 @@
   <script>
     const listnames = ["outlist", "allylist"];
 
-    const formatRow = function (row) {
+    const formatRow = function (row_raw) {
       // 0:lastupdated, 1:firstname, 2:lastname, 3:position, 4:website, 5:email, 6:nonbinary
+      const row = row_raw.map(x => x.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"));
       var html = "<tr><td>";
       var info = [];
       html += row[1] + " " + row[2];
